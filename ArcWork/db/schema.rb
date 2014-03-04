@@ -11,7 +11,50 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140228122921) do
+ActiveRecord::Schema.define(version: 20140304144726) do
+
+  create_table "courses", force: true do |t|
+    t.string   "name"
+    t.integer  "start_year"
+    t.integer  "professor_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "courses", ["professor_id"], name: "index_courses_on_professor_id", using: :btree
+
+  create_table "courses_users", force: true do |t|
+    t.integer "user_id"
+    t.integer "course_id"
+  end
+
+  create_table "homeworks", force: true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.datetime "due_date"
+    t.string   "file_path"
+    t.integer  "course_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "homeworks", ["course_id"], name: "index_homeworks_on_course_id", using: :btree
+
+  create_table "solutions", force: true do |t|
+    t.datetime "date"
+    t.string   "file_path"
+    t.text     "student_comment"
+    t.text     "professor_comment"
+    t.string   "mime"
+    t.integer  "version"
+    t.integer  "homework_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "solutions", ["homework_id"], name: "index_solutions_on_homework_id", using: :btree
+  add_index "solutions", ["user_id"], name: "index_solutions_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

@@ -7,8 +7,8 @@ class CreateSolutions < ActiveRecord::Migration
       t.text :professor_comment
       t.string :mime
       t.integer :version
-      t.references :homework_id, index: true
-      t.references :user_id, index: true
+      t.references :homework, index: true
+      t.references :user, index: true
 
       t.timestamps
     end

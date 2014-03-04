@@ -5,7 +5,7 @@ class CreateHomeworks < ActiveRecord::Migration
       t.text :description
       t.datetime :due_date
       t.string :file_path
-      t.references :course_id, index: true
+      t.references :course, index: true
 
       t.timestamps
     end

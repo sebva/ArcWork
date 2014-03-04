@@ -2,8 +2,8 @@ class CreateCourses < ActiveRecord::Migration
   def change
     create_table :courses do |t|
       t.string :name
-      t.int :start_year
-      t.references :user, index: true
+      t.integer :start_year
+      t.belongs_to :professor, index: true, :class_name => "User"
 
       t.timestamps
     end
