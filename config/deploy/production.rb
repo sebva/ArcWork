@@ -22,7 +22,7 @@ namespace :deploy do
   desc "Upload configuration"
   task :upload_configuration do
     on roles(:web, :app, :db) do
-      upload!(File.expand_path('../config/arcwork-conf.yml', __FILE__), "#{fetch(:release_path)}/config/arcwork-conf.yml")
+      upload!(File.expand_path('../../arcwork-conf.yml', __FILE__), "#{fetch(:release_path)}/config/arcwork-conf.yml")
     end
   end
 
