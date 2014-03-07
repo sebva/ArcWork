@@ -16,6 +16,19 @@
 # extended properties on the server.
 server '157.26.83.46', user: 'devweb', roles: %w{web app}, my_property: :my_value
 
+
+# Upload local configuration to server
+namespace :deploy do
+  desc "Upload configuration"
+  task :upload_configuration do
+    on roles(:web, :app, :db) do
+      upload!(File.expand_path('../config/arcwork-conf.yml', __FILE__), "#{fetch(:release_path)}/config/arcwork-conf.yml")
+    end
+  end
+
+  before "deploy:updated", :upload_configuration
+end
+
 # you can set custom ssh options
 # it's possible to pass any option but you need to keep in mind that net/ssh understand limited list of options
 # you can see them in [net/ssh documentation](http://net-ssh.github.io/net-ssh/classes/Net/SSH.html#method-c-start)
