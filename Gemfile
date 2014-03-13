@@ -53,3 +53,6 @@ gem 'capistrano-bundler'
 gem 'capistrano-rails'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+
+gem 'jquery-datatables-rails', git: 'https://github.com/rweng/jquery-datatables-rails.git'
