@@ -15,11 +15,37 @@
         <%= render 'layouts/navigation_links' %>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-          <% if user_signed_in? %>
-            <li><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>
-          <% end %>
+        <% if user_signed_in? %>
+          <li><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>
+        <% end %>
       </ul>
-
+        <% if not user_signed_in? %>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <div class="border-form-div">
+                <!--source https://github.com/plataformatec/devise/wiki/How-To:-Display-a-custom-sign_in-form-anywhere-in-your-app-->
+                <%= form_for(:user, :class => "well", :url => session_path(:user)) do |f| %>
+                    <div class="form-group col-md-12">
+                        <%= f.text_field :email, :class => "form-control" %>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <%= f.password_field :password, :class => "form-control" %>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <%= f.check_box :remember_me %>
+                        <%= f.label :remember_me %>
+                    <div class="form-group">
+                        <%= f.submit 'Sign in' , :class => "btn btn-primary"%>
+                    </div>
+                    <%= link_to "<span class='btn btn-link'>Forgot your password?</span>".html_safe, new_password_path(:user) %>
+                <% end %>
+              </div>
+            </ul>
+          </li>
+        </ul>
+       <%end%>
     </div>
   </div>
 </nav>
