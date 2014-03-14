@@ -1,4 +1,4 @@
-class SolutionController < ApplicationController
+class SolutionsController < ApplicationController
   def index
   end
 

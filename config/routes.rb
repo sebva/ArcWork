@@ -1,34 +1,21 @@
 ArcWork::Application.routes.draw do
-  get "course/index"
-  get "course/show"
-  get "course/edit"
-  get "course/new"
-  get "course/create"
-  get "course/update"
-  get "course/destroy"
-  get "user/index"
-  get "user/new"
-  get "user/edit"
-  get "user/create"
-  get "user/update"
-  get "user/destroy"
-  get "solution/index"
-  get "solution/create"
-  get "solution/comment"
-  get "homework/index"
-  get "homework/show"
-  get "homework/new"
-  get "homework/edit"
-  get "homework/create"
-  get "homework/update"
-  get "homework/destroy"
-  get "home/index"
-  devise_for :users
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
 
+  get "home/index"
   # You can have the root of your site routed with "root"
   root 'home#index'
+
+  devise_for :users
+
+  resources :users
+  resources :courses do
+    resources :homeworks do
+      resources :solutions, except: [:update, :destroy, :edit]
+    end
+  end
+
+
+  # The priority is based upon order of creation: first created -> highest priority.
+  # See how all your routes lay out with "rake routes".
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

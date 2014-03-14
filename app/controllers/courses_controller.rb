@@ -1,14 +1,15 @@
-class HomeworkController < ApplicationController
+class CoursesController < ApplicationController
   def index
+    @courses = Course.all
   end
 
   def show
   end
 
-  def new
+  def edit
   end
 
-  def edit
+  def new
   end
 
   def create

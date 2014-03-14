@@ -1,0 +1,18 @@
+<h1>Devoirs</h1>
+<p><%= link_to 'Nouveau devoir', homework_new_path %></p>
+<table class="table">
+    <tr>
+        <th>Titre</th>
+        <th>Cours</th>
+        <th>Date de rendu</th>
+        <th>Rendu le</th>
+    </tr>
+    <% @homework.each do |hw| %>
+        <tr>
+            <td><%= link_to hw.title, hw %></td>
+            <td><%= link_to hw.course.name, hw.course %></td>
+            <td><%= hw.due_date %></td>
+            <td>&nbsp;</td>
+        </tr>
+    <% end %>
+</table>
