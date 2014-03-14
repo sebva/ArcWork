@@ -17,3 +17,11 @@ rerun.txt
 pickle-email-*.html
 .project
 config/arcwork-conf.yml
+# IntelliJ
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+.idea_modules/
+
