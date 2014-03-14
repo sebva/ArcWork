@@ -19,6 +19,10 @@ class CoursesController < ApplicationController
   def new
     @course = Course.new
     @professors = User.all
+    @course.start_year = Time.now.year
+    if(Time.now.month < 8)
+      @course.start_year -=1
+    end
   end
 
   def create
