@@ -17,6 +17,8 @@ class CoursesController < ApplicationController
   end
 
   def new
+    @course = Course.new
+    @professors = User.all
   end
 
   def create
