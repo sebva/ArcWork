@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require twitter/bootstrap
 //= require turbolinks
 //= require bootstrap
 //= require_tree .
@@ -25,8 +26,3 @@ $(document).ready( function () {
 
     } );
 } );
-
-
-$('#yearselector').on('change', function() {
-    window.location.replace("http://stackoverflow.com");
-})

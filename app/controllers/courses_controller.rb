@@ -8,9 +8,12 @@ class CoursesController < ApplicationController
   end
 
   def show
+    @course = Course.find(params[:id])
   end
 
   def edit
+    @course = Course.find(params[:id])
+    @professors = User.all
   end
 
   def new
