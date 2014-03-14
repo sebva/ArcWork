@@ -1,6 +1,10 @@
 class CoursesController < ApplicationController
   def index
-    @courses = Course.all
+    @min_year = Course.minimum("start_year")
+    @min_year = Time.now.year if @min_year.nil?
+    @curr_year = params[:year]
+    @curr_year = Time.now.year if @curr_year.nil?
+    @courses = Course.where(start_year: @curr_year)
   end
 
   def show

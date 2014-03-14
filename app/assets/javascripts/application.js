@@ -25,3 +25,8 @@ $(document).ready( function () {
 
     } );
 } );
+
+
+$('#yearselector').on('change', function() {
+    window.location.replace("http://stackoverflow.com");
+})
