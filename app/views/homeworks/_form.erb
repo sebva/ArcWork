@@ -1,0 +1,7 @@
+<%= form_for [@course, @homework] do |f| %>
+    <p>Titre : <%= f.text_field :title %></p>
+    <p>Description : <%= f.text_area :description %></p>
+    <p>Délai pour le rendu : <%= f.datetime_select :due_date %></p>
+    <p>Consigne : <%= f.file_field :file_path %></p>
+    <p><%= f.submit %></p>
+<% end %>

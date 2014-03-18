@@ -1,5 +1,5 @@
 <h1>Devoirs</h1>
-<p><%= link_to 'Nouveau devoir', homework_new_path %></p>
+<p><%= link_to 'Nouveau devoir', new_course_homework_path %></p>
 <table class="table">
     <tr>
         <th>Titre</th>
@@ -9,10 +9,13 @@
     </tr>
     <% @homework.each do |hw| %>
         <tr>
-            <td><%= link_to hw.title, hw %></td>
+            <td><%= link_to hw.title, [@course, hw] %></td>
             <td><%= link_to hw.course.name, hw.course %></td>
             <td><%= hw.due_date %></td>
-            <td>&nbsp;</td>
+            <td>
+                <%= link_to content_tag('span', '', class: 'glyphicon glyphicon-edit'), edit_course_homework_url(@course, hw), class: 'btn btn-info' %>
+                <%= link_to content_tag('span', '', class: 'glyphicon glyphicon-trash'), [@course, hw], class: 'btn btn-danger', confirm: "Êtes-vous sûr de vouloir supprimer '#{hw.title}' ?", method: :delete %>
+            </td>
         </tr>
     <% end %>
 </table>
