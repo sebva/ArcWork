@@ -16,13 +16,11 @@
 //= require turbolinks
 //= require bootstrap
 //= require_tree .
+//= require data-confirm-modal
 //= require dataTables/jquery.dataTables
 //= require dataTables/jquery.dataTables.bootstrap3
 //= require dataTables/extras/TableTools
 //= require dataTables/extras/ZeroClipboard.js
-
-//= require data-confirm-modal
-
 
 $(document).ready( function () {
     $('.searchable_datatable').dataTable( {

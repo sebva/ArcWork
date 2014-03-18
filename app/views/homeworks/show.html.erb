@@ -1,2 +1,14 @@
-<h1>Homework#show</h1>
-<p>Find me in app/views/homework/show.html.erb</p>
+<h1><%= @homework.title %></h1>
+<%= link_to "Edit homework", edit_course_homework_url(@course, @homework) %>
+<table class="table">
+    <tr>
+        <th>Nom</th>
+        <th>Rendu le</th>
+    </tr>
+    <% @solutions.each do |solution| %>
+        <tr>
+            <td><%= solution.user.name %></td>
+            <td><%= solution.date %></td>
+        </tr>
+    <% end %>
+</table>
