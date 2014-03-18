@@ -1,4 +1,11 @@
 GIT
+  remote: git://github.com/ifad/data-confirm-modal.git
+  revision: 60af41a47e7edc6dc64eba185a894a067a256ee9
+  specs:
+    data-confirm-modal (1.0.1)
+      railties (>= 3.0)
+
+GIT
   remote: https://github.com/rweng/jquery-datatables-rails.git
   revision: 788a7b24caf8fe58a5493aa3f6a065879a9f752a
   specs:
@@ -167,6 +174,7 @@ DEPENDENCIES
   capistrano-rails
   capistrano-rvm
   coffee-rails (~> 4.0.0)
+  data-confirm-modal!
   devise
   jbuilder (~> 1.2)
   jquery-datatables-rails!
