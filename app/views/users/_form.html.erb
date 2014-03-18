@@ -1,0 +1,6 @@
+<%= form_for @user do |f| %>
+	<p>Name: <%= f.text_field :name %></p>
+	<p>E-mail: <%= f.email_field :email %></p>
+	<!-- TODO Rank -->
+	<p><%= f.submit %></p>
+<% end %>
