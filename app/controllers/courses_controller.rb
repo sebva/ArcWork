@@ -8,12 +8,21 @@ class CoursesController < ApplicationController
   end
 
   def show
+    @course = Course.find(params[:id])
   end
 
   def edit
+    @course = Course.find(params[:id])
+    @professors = User.all
   end
 
   def new
+    @course = Course.new
+    @professors = User.all
+    @course.start_year = Time.now.year
+    if(Time.now.month < 8)
+      @course.start_year -=1
+    end
   end
 
   def create

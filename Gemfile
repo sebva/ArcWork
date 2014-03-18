@@ -56,3 +56,6 @@ gem 'capistrano-rails'
 
 
 gem 'jquery-datatables-rails', git: 'https://github.com/rweng/jquery-datatables-rails.git'
+gem 'twitter-bootstrap-rails'
+gem 'bootstrap_form'
+gem 'data-confirm-modal', github: 'ifad/data-confirm-modal'

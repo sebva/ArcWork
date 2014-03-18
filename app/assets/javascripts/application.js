@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require twitter/bootstrap
 //= require turbolinks
 //= require bootstrap
 //= require_tree .
@@ -20,13 +21,11 @@
 //= require dataTables/extras/TableTools
 //= require dataTables/extras/ZeroClipboard.js
 
+//= require data-confirm-modal
+
+
 $(document).ready( function () {
     $('.searchable_datatable').dataTable( {
 
     } );
 } );
-
-
-$('#yearselector').on('change', function() {
-    window.location.replace("http://stackoverflow.com");
-})

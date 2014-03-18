@@ -25,10 +25,10 @@
             <td><%= course.professor.email %></td>
             <td>
                 <%= link_to edit_course_path(course), :class => 'btn btn-primary btn-mini' do %>
-                    <i class="glyphicon glyphicon-edit"></i>
+                    <span class="glyphicon glyphicon-edit"></span>
                 <% end %>
-                <%= link_to course_path(course), :method => :delete, :class => 'btn btn-danger btn-mini' do %>
-                    <i class="glyphicon glyphicon-remove"></i>
+                <%= link_to course_path(course), :method => :delete, :class => 'btn btn-danger btn-mini', confirm:"Are you sure you want to delete the course "+course.name do %>
+                    <span class="glyphicon glyphicon-trash"></span>
                 <% end %>
 
             <% end %>

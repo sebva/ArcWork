@@ -1,0 +1,6 @@
+<%= bootstrap_form_for(@course) do |f| %>
+    <%= f.text_field :name %>
+    <%= f.text_field :start_year %>
+    <%= f.collection_select :professor, @professors, :id, :email, {class: "form-control"} %>
+    <%= f.submit  "Apply", class: "btn btn-success" %>
+<% end %>
