@@ -1,2 +1,20 @@
-<h1>User#index</h1>
-<p>Find me in app/views/user/index.html.erb</p>
+<h1>Users</h1>
+<p><%= link_to 'New user', new_user_path %></p>
+<table class="table">
+    <tr>
+        <th>Name</th>
+        <th>E-mail</th>
+        <th>Rank</th>
+        <th>&nbsp;</th>
+    </tr>
+    <% @users.each do |user| %>
+        <tr>
+            <td><%= link_to user.name, edit_user_path(user) %></td>
+            <td><%= link_to user.email, 'mailto:' + user.email %></td>
+            <td><%= user.rank %></td>
+            <td>
+                <%= link_to content_tag('span', '', class: 'glyphicon glyphicon-trash'), user, class: 'btn btn-danger', confirm: "Do you really want to delete '#{user.name}' ?", method: :delete %>
+            </td>
+        </tr>
+    <% end %>
+</table>
