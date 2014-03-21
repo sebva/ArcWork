@@ -11,4 +11,17 @@ class User < ActiveRecord::Base
   RANK_STUDENT = 0
   RANK_PROFESSOR = 1
   RANK_DEAN = 2
+
+  def isStudent?
+    self.rank == RANK_STUDENT
+  end
+
+  def isProfessor?
+    self.rank == RANK_PROFESSOR
+  end
+
+  def isDean?
+    self.rank == RANK_DEAN
+  end
+
 end
