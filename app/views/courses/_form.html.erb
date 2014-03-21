@@ -1,6 +1,13 @@
+<% if @course.errors.full_messages.any? %>
+    <% @course.errors.full_messages.each do |error_message| %>
+        <%= error_message if @course.errors.full_messages.first == error_message %> <br />
+    <% end %>
+<% end %>
+
 <%= bootstrap_form_for(@course) do |f| %>
+
     <%= f.text_field :name %>
     <%= f.text_field :start_year %>
-    <%= f.collection_select :professor, @professors, :id, :email, {class: "form-control"} %>
+    <%= f.collection_select :professor_id, @professors, :id, :email, {class: "form-control"} %>
     <%= f.submit  "Apply", class: "btn btn-success" %>
 <% end %>
