@@ -7,4 +7,8 @@ class User < ActiveRecord::Base
   has_many :solutions
   has_and_belongs_to_many :courses
   has_many :courses_professor, :class_name => 'Course', :foreign_key => 'professor_id'
+
+  RANK_STUDENT = 0
+  RANK_PROFESSOR = 1
+  RANK_DEAN = 2
 end
