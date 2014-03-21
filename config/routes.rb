@@ -9,7 +9,7 @@ ArcWork::Application.routes.draw do
   resources :users
   resources :courses do
     resources :homeworks do
-      resources :solutions, except: [:update, :destroy, :edit]
+      resources :solutions#, except: [:update, :destroy, :edit]
     end
   end
 
