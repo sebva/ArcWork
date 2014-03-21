@@ -1,5 +1,4 @@
-<h1>Course#index</h1>
-<p>Find me in app/views/course/index.html.erb</p>
+<h1>Courses</h1>
 
     <table class="searchable_datatable">
         <thead>
@@ -12,10 +11,13 @@
         </thead>
         <tbody>
         <select onchange="location = this.options[this.selectedIndex].value;">
-            <% for y in @min_year..Time.now.year %>
-                <option value="?year=<%= y %>" <%= ' selected' if @curr_year.to_i == y.to_i %>><%= y %> / <%= y+1 %></option>
+            <% for y in @min_year..@max_year %>
+                <option value="?year=<%= y %>" <%= ' selected' if @curr_year == y %>><%= y %> / <%= y+1 %></option>
             <% end %>
         </select>
+        <%= link_to new_course_path, :class => 'btn btn-primary btn-mini' do %>
+            <span class="glyphicon glyphicon-plus"></span>
+        <% end %>
 
 
         <% @courses.each do |course| %>
