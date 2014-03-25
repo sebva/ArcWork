@@ -10,16 +10,15 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery
-//= require jquery_ujs
-//= require turbolinks
 //= require bootstrap
+//= require bootstrap-things
 //= require data-confirm-modal
 //= require dataTables/jquery.dataTables
 //= require dataTables/jquery.dataTables.bootstrap3
 //= require dataTables/extras/TableTools
 //= require dataTables/extras/ZeroClipboard.js
-//= require_tree .
+//= require jquery
+//= require jquery_ujs
 
 $(document).ready( function () {
     $('.searchable_datatable').dataTable( {
