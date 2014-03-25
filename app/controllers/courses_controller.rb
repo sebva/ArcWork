@@ -62,6 +62,11 @@ class CoursesController < ApplicationController
     if @course.update(params[:course].permit(:name, :start_year, :professor_id))
       redirect_to action: "index"
     else
+      @course.errors.each do |attribute, error|
+      flash.now[:error] = attribute.to_s + " " +  error.to_s
+      end
+      @course.errors.clear
+      @professors = User.all
       render 'edit'
     end
   end
