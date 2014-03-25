@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.2'
+gem 'rails', '>= 4.0.2'
 
 # Use mysql as the database for Active Record
 gem 'mysql2'
@@ -9,7 +9,7 @@ gem 'mysql2'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 
-gem 'bootstrap-sass'
+gem 'bootstrap-sass', '>= 3.0.0'
 group :development do
   gem 'rails_layout'
 end
@@ -27,7 +27,7 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
+# gem 'turbolinks'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
@@ -56,6 +56,6 @@ gem 'capistrano-rails'
 
 
 gem 'jquery-datatables-rails', git: 'https://github.com/rweng/jquery-datatables-rails.git'
-gem 'twitter-bootstrap-rails'
+# gem 'twitter-bootstrap-rails', :git => 'https://github.com/seyhunak/twitter-bootstrap-rails.git', :branch => 'bootstrap3'
 gem 'bootstrap_form'
 gem 'data-confirm-modal', git: 'https://github.com/ifad/data-confirm-modal.git'
