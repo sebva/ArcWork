@@ -1,2 +1,24 @@
-<h1>Solution#index</h1>
-<p>Find me in app/views/solution/index.html.erb</p>
+<h1>Solutions</h1>
+
+<% @solution.each do |sol| %>
+    <div class="container">
+        <div class="col-md-2">
+            <h2>Version : <%= sol.version %></h2>
+            Student : <%= User.find(sol.user_id).email %>
+            Last update : <%= sol.updated_at %>
+            MIME PHOTO <%= sol.mime %>
+            <img src="" alt="" class="img-thumbnail">
+        </div>
+        <div class="col-md-5">
+            <h3>Student description</h3>
+            <%= sol.student_comment %>
+        </div>
+        <div class="col-md-5">
+            <h3>Professor description</h3>
+            <%= form_for [@course,@homework,sol] do |f| %>
+                <%= f.text_area :professor_comment, :class => 'form-control'%>
+                <%= f.submit "Comment", :class => 'btn btn-primary'%>
+            <% end %>
+        </div>
+    </div>
+<% end %>
