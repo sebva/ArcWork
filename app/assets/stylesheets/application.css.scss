@@ -9,7 +9,6 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require_tree .
  *= require dataTables/jquery.dataTables
  *= require dataTables/jquery.dataTables.bootstrap3
  *= require dataTables/extras/TableTools
@@ -17,3 +16,7 @@
  *= require rails_bootstrap_forms
  */
 
+@import "bootstrap";
+@import "bootstrap/theme";
+
+//= require_tree .

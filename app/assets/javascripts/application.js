@@ -12,15 +12,14 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require twitter/bootstrap
 //= require turbolinks
 //= require bootstrap
-//= require_tree .
 //= require data-confirm-modal
 //= require dataTables/jquery.dataTables
 //= require dataTables/jquery.dataTables.bootstrap3
 //= require dataTables/extras/TableTools
 //= require dataTables/extras/ZeroClipboard.js
+//= require_tree .
 
 $(document).ready( function () {
     $('.searchable_datatable').dataTable( {
