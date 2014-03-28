@@ -1,4 +1,4 @@
-<h1><%= @homework.title %></h1>
+<h1>Solutions of <%= @homework.title %></h1>
 <%= link_to "Edit homework", edit_course_homework_url(@course, @homework) %>
 <table class="table">
     <tr>
@@ -7,7 +7,7 @@
     </tr>
     <% @solutions.each do |solution| %>
         <tr>
-            <td><%= solution.user.name %></td>
+            <td><%= link_to solution.user.name, course_homework_solutions_url(@course, @homework, user_id: solution.user.id) %></td>
             <td><%= solution.date %></td>
         </tr>
     <% end %>
