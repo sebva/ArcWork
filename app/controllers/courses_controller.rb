@@ -40,7 +40,7 @@ class CoursesController < ApplicationController
 
       else
         @course.errors.each do |attribute, error|
-          flash.now[:error] = attribute.to_s + " " +  error.to_s
+          flash.now[:error] = Course.human_attribute_name(attribute) + " " +  error.to_s
         end
         @course.errors.clear
         @professors = User.all
@@ -59,8 +59,7 @@ class CoursesController < ApplicationController
         redirect_to action: "index"
       else
         @course.errors.each do |attribute, error|
-        flash.now[:error] = attribute.to_s + " " +  error.to_s
-        end
+          flash.now[:error] = Course.human_attribute_name(attribute) + " " +  error.to_s        end
         @course.errors.clear
         @professors = User.all
         render 'edit'
