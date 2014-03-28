@@ -29,7 +29,7 @@ class SolutionsController < ApplicationController
     @solution = Solution.new(get_params)
     @solution.homework_id = @homework.id
     @solution.user_id = @user.id
-    @solution.version = @homework.solutions.size
+    @solution.version = @homework.solutions.where(user_id: @user.id).size+1
 
     if @solution.save
       redirect_to [@course,@homework,Solution]

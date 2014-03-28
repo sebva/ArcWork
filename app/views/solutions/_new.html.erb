@@ -1,0 +1,16 @@
+<!--check if it's a student ?-->
+
+<%= form_for @solution, url: {action: "create"} do |f| %>
+    <div class="form-group">
+        <label for="studentComment">Student comment : </label>
+        <%= f.text_area :student_comment, html: {id: "studentComment"}%>
+    </div>
+    <div class="form-group">
+        Mime : <%= f.text_field :mime%>
+    </div>
+    <div class="form-group">
+        File path : <%= f.file_field :file_path %>
+    </div>
+    <%= f.submit "Create"%>
+
+<% end %>
