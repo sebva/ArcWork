@@ -10,7 +10,12 @@ class CoursesController < ApplicationController
   end
 
   def show
-    redirect_to root_url
+    if(!current_user.nil? && current_user.isProfessor?)
+
+
+    else
+      redirect_to root_url
+    end
   end
 
   def edit
@@ -26,7 +31,7 @@ class CoursesController < ApplicationController
     if(!current_user.nil? && current_user.isDean?)
       @course = Course.new
       @professors = User.all
-      @course.start_year = get_current_year
+      @course.start_year = Course.get_current_year
     else
       redirect_to root_url
     end
@@ -83,38 +88,31 @@ class CoursesController < ApplicationController
 
   end
 
-  def get_current_year()
-    year = Time.now.year;
-    if Time.now.month < 8
-      year -= 1
-    end
-    return year
-  end
 
   def couses_add_view_init()
     @curr_year = params[:year]
     if params[:year].nil?
-      @curr_year = get_current_year
+      @curr_year = Course.get_current_year
     else
       @curr_year =params[:year].to_i
     end
 
     @min_year = Course.minimum("start_year")
     if  @min_year.nil?
-      @min_year = get_current_year
+      @min_year = Course.get_current_year
     else
       @min_year = @min_year.to_i
     end
-    @min_year = get_current_year if @min_year > get_current_year
+    @min_year = Course.get_current_year if @min_year > Course.get_current_year
 
 
     @max_year = Course.maximum("start_year")
     if  @max_year.nil?
-      @max_year = get_current_year
+      @max_year = Course.get_current_year
     else
       @max_year = @max_year.to_i
     end
-    @max_year = get_current_year if @max_year < get_current_year
+    @max_year = Course.get_current_year if @max_year < Course.get_current_year
     @courses = Course.where(start_year: @curr_year)
   end
 
