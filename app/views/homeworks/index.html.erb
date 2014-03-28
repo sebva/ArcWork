@@ -5,17 +5,21 @@
         <th>Title</th>
         <th>Course</th>
         <th>Deadline</th>
+        <% if current_user.isProfessor? %>
         <th>&nbsp;</th>
+        <% end %>
     </tr>
     <% @homework.each do |hw| %>
         <tr>
             <td><%= link_to hw.title, [@course, hw] %></td>
             <td><%= link_to hw.course.name, hw.course %></td>
             <td><%= hw.due_date %></td>
+            <% if current_user.isProfessor? %>
             <td>
                 <%= link_to content_tag('span', '', class: 'glyphicon glyphicon-edit'), edit_course_homework_url(@course, hw), class: 'btn btn-info' %>
                 <%= link_to content_tag('span', '', class: 'glyphicon glyphicon-trash'), [@course, hw], class: 'btn btn-danger', confirm: "Are-you sure you want to delete '#{hw.title}' ?", method: :delete %>
             </td>
+            <% end %>
         </tr>
     <% end %>
 </table>

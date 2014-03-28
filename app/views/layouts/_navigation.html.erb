@@ -37,6 +37,7 @@
                                         <%= f.label :remember_me %>
                                         <div class="form-group">
                                             <%= f.submit 'Sign in', :class => "btn btn-primary" %>
+                                            <%= link_to  "<span class='btn btn-primary'>Sign up</span>".html_safe, user_registration_path %>
                                         </div>
                                         <%= link_to "<span class='btn btn-link'>Forgot your password?</span>".html_safe, new_password_path(:user) %>
                                     </div>

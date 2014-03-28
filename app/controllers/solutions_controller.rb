@@ -1,5 +1,10 @@
 class SolutionsController < ApplicationController
   def index
+    @solution = Solution.new
+
+    # @homework = Homework.find(params[:homework_id])
+    # @user = current_user
+    # @solution = Solution.new
 
     @homework = Homework.find(params[:homework_id])
     @course = Course.find(params[:course_id])
@@ -7,18 +12,13 @@ class SolutionsController < ApplicationController
     @user = User.find(current_user.id)
 
     if @user.isProfessor?
-      @solution = @homework.solutions
+      # TODOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOoo
+      @solutions = @homework.solutions
     elsif @user.isStudent?
-      @solution = @homework.solutions.where(user_id: @user.id)
+      @solutions = @homework.solutions.where(user_id: @user.id)
     else
       redirect_to root_path
     end
-  end
-
-  def new
-    @homework = Homework.find(params[:homework_id])
-    @user = current_user
-    @solution = Solution.new
   end
 
   def create
@@ -29,12 +29,10 @@ class SolutionsController < ApplicationController
     @solution = Solution.new(get_params)
     @solution.homework_id = @homework.id
     @solution.user_id = @user.id
-    @solution.version = 1
+    @solution.version = @homework.solutions.where(user_id: @user.id).size+1
 
     if @solution.save
-      redirect_to [@course,@homework,@solution]
-    else
-      render 'new'
+      redirect_to [@course,@homework,Solution]
     end
   end
 
