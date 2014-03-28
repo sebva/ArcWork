@@ -1,3 +1,14 @@
 <%# add navigation links to this file %>
-<li><%= link_to "Courses", courses_path %></li>
-<li><%= link_to "Users", users_path %></li>
+
+<li class="<%=is_active('home','index')%>"><%= link_to "Home", root_path %></li>
+
+<% if(!current_user.nil?) %>
+    <% if(current_user.isDean?) %>
+        <%= render 'layouts/dean_navigation_links' %>
+    <% end %>
+    <% if(current_user.isProfessor?) %>
+        HELLOOO
+        <%= render 'layouts/professor_navigation_links' %>
+    <% end %>
+
+<% end %>

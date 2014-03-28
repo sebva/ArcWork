@@ -19,5 +19,19 @@
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
 
-en:
-  hello: "Hello world"
+ en:
+   activerecord:
+     models:
+      course: "Course"
+     attributes:
+       course:
+         name: "Name"
+         start_year: "Start year"
+     errors:
+       models:
+         course:
+           attributes:
+             name:
+               blank: "is required"
+             start_year:
+               inclusion: "has to be between 2000 and 2200"

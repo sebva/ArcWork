@@ -24,4 +24,8 @@ class User < ActiveRecord::Base
     self.rank == RANK_DEAN
   end
 
+  def current_year_courses
+    return self.courses_professor.where("start_year = ?", Course.get_current_year)
+  end
+
 end
