@@ -1,24 +1,72 @@
 <h1>Solutions</h1>
 
-<% @solution.each do |sol| %>
-    <div class="container">
-        <div class="col-md-2">
-            <h2>Version : <%= sol.version %></h2>
-            Student : <%= User.find(sol.user_id).email %>
-            Last update : <%= sol.updated_at %>
-            MIME PHOTO <%= sol.mime %>
-            <img src="" alt="" class="img-thumbnail">
-        </div>
-        <div class="col-md-5">
-            <h3>Student description</h3>
-            <%= sol.student_comment %>
-        </div>
-        <div class="col-md-5">
-            <h3>Professor description</h3>
-            <%= form_for [@course,@homework,sol] do |f| %>
-                <%= f.text_area :professor_comment, :class => 'form-control'%>
-                <%= f.submit "Comment", :class => 'btn btn-primary'%>
-            <% end %>
+<% if @user.isStudent? %>
+    <div class="panel-group container" id="accordion">
+        <div class="panel panel-default">
+            <div class="panel-heading"
+                 data-toggle="collapse"
+                 data-target="#new">
+                <h4 class="panel-title">
+                    New
+                </h4>
+            </div>
+            <div id="new" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <%= render "new" %>
+                </div>
+            </div>
         </div>
     </div>
 <% end %>
+
+<div class="panel-group container" id="accordion">
+<% @solutions.reverse.each_with_index do |sol,index| %>
+    <div class="panel panel-default">
+        <div class="panel-heading"
+             data-toggle="collapse"
+             data-target="#<%=index%>">
+            <h4 class="panel-title">
+                Version : <%= sol.version %>
+            </h4>
+        </div>
+        <div id="<%=index%>" class="panel-collapse collapse <%= "in" if index==0%>">
+            <div class="panel-body">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        Student : <%= User.find(sol.user_id).email %>
+                    </div>
+                    <div class="form-group">
+                        Last update : <%= sol.updated_at.strftime("%d.%m.%Y")  %>
+                    </div>
+                    <div class="form-group">
+                        MIME PHOTO <%= sol.mime %>
+                    </div>
+                    <div class="form-group">
+                        <img src="" alt="" class="img-thumbnail">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <h3>Student description</h3>
+                    <%= sol.student_comment %>
+                </div>
+                <div class="col-md-5">
+                    <h3>Professor description</h3>
+                    <!--if professor => can change else like upper-->
+                    <% if @user.isStudent? %>
+                        <% if sol.professor_comment <=> "" %>
+                            <%= sol.professor_comment %>
+                        <% else %>
+                            The professor hasn't comment yet
+                        <% end %>
+                    <% else %>
+                        <%= form_for [@course,@homework,sol] do |f| %>
+                            <%= f.text_area :professor_comment, :class => 'form-control'%>
+                            <%= f.submit "Comment", :class => 'btn btn-primary'%>
+                        <% end %>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
+<% end %>
+</div>

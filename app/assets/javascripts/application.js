@@ -25,3 +25,15 @@ $(document).ready( function () {
         "bRetrieve": true
     } );
 } );
+
+//enhance the bootstrap3 accordion
+$(function () {
+    $('#collapse-init').click(function () {
+        $('.panel-collapse').collapse('show');
+        $('.panel-title').attr('data-toggle', '');
+        $(this).text('Enable accordion behavior');
+    });
+    $('#accordion').on('show.bs.collapse', function () {
+        $('#accordion .in').collapse('hide');
+    });
+});
