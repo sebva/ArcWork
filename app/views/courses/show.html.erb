@@ -1,2 +1,27 @@
-<h1>Course#show</h1>
-<p>Find me in app/views/course/show.html.erb</p>
+<h1><%= @course.name %> students</h1>
+<table class="searchable_datatable">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+
+
+
+
+    <% @users.each do |user| %>
+        <tr>
+            <td><%= user.id %></td>
+            <td><%= user.name %></td>
+            <td><%= user.email %></td>
+            <td>
+
+            </td>
+        </tr>
+    <% end %>
+    </tbody>
+</table>
