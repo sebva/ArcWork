@@ -1,4 +1,8 @@
 class UsersController < ApplicationController
+
+  before_filter :authenticate_user!
+  before_filter :check_dean
+
   def show
     @user = User.find(params[:id])
   end
@@ -30,5 +34,11 @@ class UsersController < ApplicationController
 
   def get_params
     params[:user].permit(:name, :email, :rank)
+  end
+
+  def check_dean
+    unless current_user.isDean?
+      redirect_to home_index_path
+    end
   end
 end
