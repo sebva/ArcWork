@@ -6,7 +6,7 @@ ArcWork::Application.routes.draw do
 
   devise_for :users
 
-  resources :users
+  resources :users, except: [:new, :create]
   resources :courses do
     resources :homeworks do
       resources :solutions#, except: [:update, :destroy, :edit]

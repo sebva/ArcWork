@@ -7,21 +7,8 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
-  def new
-    @user = User.new
-  end
-
   def edit
     @user = User.find(params[:id])
-  end
-
-  def create
-    @user = User.new(get_params)
-    if @user.save
-      redirect_to users_path
-    else
-      render 'new'
-    end
   end
 
   def update

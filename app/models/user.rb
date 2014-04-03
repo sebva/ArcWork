@@ -12,6 +12,19 @@ class User < ActiveRecord::Base
   RANK_PROFESSOR = 1
   RANK_DEAN = 2
 
+  def rank_as_string
+    case self.rank
+      when RANK_DEAN
+        return "Dean"
+      when RANK_PROFESSOR
+        return "Professor"
+      when RANK_STUDENT
+        return "Student"
+      else
+        return "Unknown"
+    end
+  end
+
   def isStudent?
     self.rank == RANK_STUDENT
   end

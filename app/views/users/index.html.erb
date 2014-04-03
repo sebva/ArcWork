@@ -1,20 +1,24 @@
 <h1>Users</h1>
-<p><%= link_to 'New user', new_user_path %></p>
-<table class="table">
+<table class="searchable_datatable">
+    <thead>
     <tr>
         <th>Name</th>
         <th>E-mail</th>
         <th>Rank</th>
         <th>&nbsp;</th>
     </tr>
+    </thead>
+    <tbody>
     <% @users.each do |user| %>
+        <% user.name = user.email if user.name.empty? %>
         <tr>
             <td><%= link_to user.name, edit_user_path(user) %></td>
             <td><%= link_to user.email, 'mailto:' + user.email %></td>
-            <td><%= user.rank %></td>
+            <td><%= user.rank_as_string %></td>
             <td>
                 <%= link_to content_tag('span', '', class: 'glyphicon glyphicon-trash'), user, class: 'btn btn-danger', confirm: "Do you really want to delete '#{user.name}' ?", method: :delete %>
             </td>
         </tr>
     <% end %>
+    </tbody>
 </table>
