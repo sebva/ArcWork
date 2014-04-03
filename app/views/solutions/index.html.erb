@@ -32,18 +32,15 @@
         <div id="<%=index%>" class="panel-collapse collapse <%= "in" if index==0%>">
             <div class="panel-body">
                 <div class="col-md-3">
-                    <div class="form-group">
-                        Student : <%= User.find(sol.user_id).email %>
-                    </div>
-                    <div class="form-group">
-                        Last update : <%= sol.updated_at.strftime("%d.%m.%Y")  %>
-                    </div>
-                    <div class="form-group">
-                        MIME PHOTO <%= sol.mime %>
-                    </div>
-                    <div class="form-group">
-                        <img src="" alt="" class="img-thumbnail">
-                    </div>
+                    <dl>
+                        <dt>Student</dt>
+                        <dd><%= User.find(sol.user_id).email %></dd>
+                        <dt>Last update</dt>
+                        <dd><%= sol.updated_at.strftime("%d.%m.%Y")  %></dd>
+                        <dt>MIME PHOTO</dt>
+                        <dd><%= sol.mime %></dd>
+                    </dl>
+                    <img src="" alt="" class="img-thumbnail">
                 </div>
                 <div class="col-md-4">
                     <h3>Student description</h3>

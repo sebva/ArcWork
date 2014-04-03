@@ -2,15 +2,17 @@
 
 <%= form_for @solution, url: {action: "create"} do |f| %>
     <div class="form-group">
-        <label for="studentComment">Student comment : </label>
-        <%= f.text_area :student_comment, html: {id: "studentComment"}%>
+        <label for="solution_student_comment">Student comment</label>
+        <%= f.text_area :student_comment, class: 'form-control' %>
     </div>
     <div class="form-group">
-        Mime : <%= f.text_field :mime%>
+        <label for="solution_mime">Mime</label>
+        <%= f.text_field :mime, class: 'form-control' %>
     </div>
     <div class="form-group">
-        File path : <%= f.file_field :file_path %>
+        <label for="solution_file_path">File path</label>
+        <%= f.file_field :file_path, class: 'form-control' %>
     </div>
-    <%= f.submit "Create"%>
+    <%= f.submit "Create", class: 'btn btn-primary' %>
 
 <% end %>
