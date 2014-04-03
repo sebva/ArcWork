@@ -1,6 +1,13 @@
 <h1>Homework</h1>
-<p><%= link_to 'New homework', new_course_homework_path %></p>
-<table class="table">
+<% if current_user.isProfessor? %>
+<p>
+    <%= link_to new_course_homework_path, class: "btn btn-primary" do %>
+        <i class="glyphicon glyphicon-plus"></i> New homework
+    <% end %>
+</p>
+<% end %>
+<table class="searchable_datatable">
+    <thead>
     <tr>
         <th>Title</th>
         <th>Course</th>
@@ -9,6 +16,8 @@
         <th>&nbsp;</th>
         <% end %>
     </tr>
+    </thead>
+    <tbody>
     <% @homework.each do |hw| %>
         <tr>
             <td><%= link_to hw.title, [@course, hw] %></td>
@@ -22,4 +31,5 @@
             <% end %>
         </tr>
     <% end %>
+    </tbody>
 </table>
