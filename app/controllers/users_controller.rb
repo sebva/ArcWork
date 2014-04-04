@@ -1,4 +1,8 @@
 class UsersController < ApplicationController
+
+  before_filter :authenticate_user!
+  before_filter :check_dean
+
   def show
     @user = User.find(params[:id])
   end
@@ -7,21 +11,8 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
-  def new
-    @user = User.new
-  end
-
   def edit
     @user = User.find(params[:id])
-  end
-
-  def create
-    @user = User.new(get_params)
-    if @user.save
-      redirect_to users_path
-    else
-      render 'new'
-    end
   end
 
   def update
@@ -43,5 +34,11 @@ class UsersController < ApplicationController
 
   def get_params
     params[:user].permit(:name, :email, :rank)
+  end
+
+  def check_dean
+    unless current_user.isDean?
+      redirect_to home_index_path
+    end
   end
 end
