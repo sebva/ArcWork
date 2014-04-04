@@ -1,4 +1,7 @@
 <h1><%= @course.name %> students</h1>
+<%= link_to new_user_to_course_course_path, :class => 'btn btn-primary btn-mini' do %>
+    <span class="glyphicon glyphicon-plus"></span>
+<% end %>
 <table class="searchable_datatable">
     <thead>
     <tr>
@@ -19,7 +22,9 @@
             <td><%= user.name %></td>
             <td><%= user.email %></td>
             <td>
-
+                <%= link_to destroy_user_from_course_course_path(@course,:user => user),  :method => :delete, :class => 'btn btn-danger btn-mini', confirm:"Are you sure you want to delete the user "+user.name do %>
+                    <span class="glyphicon glyphicon-trash"></span>
+                <% end %>
             </td>
         </tr>
     <% end %>
