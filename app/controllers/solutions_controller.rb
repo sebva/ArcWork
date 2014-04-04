@@ -30,7 +30,7 @@ class SolutionsController < ApplicationController
     @solution.version = @homework.solutions.where(user_id: @user.id).size+1
 
     # TODO devise crash if there is an unknown file etension
-    extension = File.extname(@solution.file.path)[1..-1]
+    extension = @solution.file.nil? ? File.extname(@solution.file.path)[1..-1] : 'txt'
     @solution.mime = extension == '' ? 'default' : extension
 
     if @solution.save
