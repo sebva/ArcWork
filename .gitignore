@@ -24,4 +24,4 @@ config/arcwork-conf.yml
 *.ipr
 out/
 .idea_modules/
-
+config/database.yml
