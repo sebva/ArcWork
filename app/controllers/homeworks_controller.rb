@@ -66,7 +66,7 @@ class HomeworksController < ApplicationController
   private
 
   def get_params
-    params[:homework].permit(:title, :description, :due_date, :file_path)
+    params[:homework].permit(:title, :description, :due_date, :file)
   end
 
 end

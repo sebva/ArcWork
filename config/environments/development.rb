@@ -24,10 +24,18 @@ ArcWork::Application.configure do
 
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 
-  config.serve_static_assets = false
+  # ----------------------------------------------------------------------
+  # it was to false (maybe for a security reason)
+  # but for paperclip we need it to put to true for the moment
+  # we should test to download files from server via
+  # send_file and an action in the controller
+  config.serve_static_assets = true
+  # ----------------------------------------------------------------------
 
   # Debug mode disables concatenation and preprocessing of assets.
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
   config.assets.debug = true
+
+  Paperclip.options[:command_path] = '/usr/bin/'
 end

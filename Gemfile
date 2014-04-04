@@ -59,3 +59,6 @@ gem 'jquery-datatables-rails', git: 'https://github.com/rweng/jquery-datatables-
 # gem 'twitter-bootstrap-rails', :git => 'https://github.com/seyhunak/twitter-bootstrap-rails.git', :branch => 'bootstrap3'
 gem 'bootstrap_form'
 gem 'data-confirm-modal', git: 'https://github.com/ifad/data-confirm-modal.git'
+
+
+gem 'paperclip', github: 'thoughtbot/paperclip'

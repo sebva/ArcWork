@@ -2,10 +2,6 @@ class SolutionsController < ApplicationController
   def index
     @solution = Solution.new
 
-    # @homework = Homework.find(params[:homework_id])
-    # @user = current_user
-    # @solution = Solution.new
-
     @homework = Homework.find(params[:homework_id])
     @course = Course.find(params[:course_id])
     #if professor show all solutions
@@ -15,9 +11,11 @@ class SolutionsController < ApplicationController
       # TODOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOoo
       @solutions = @homework.solutions
     elsif @user.isStudent?
+      @solutions = []
       @solutions = @homework.solutions.where(user_id: @user.id)
     else
-      redirect_to root_path
+      # redirect_to root_path
+
     end
   end
 
@@ -49,7 +47,11 @@ class SolutionsController < ApplicationController
 
   private
 
+  def solution_params
+    params.require(:solution).permit(:avatar)
+  end
+
   def get_params
-    params[:solution].permit(:mime, :date, :file_path, :student_comment, :professor_comment,:version)
+    params[:solution].permit(:mime, :date, :file, :student_comment, :professor_comment,:version, :avatar)
   end
 end

@@ -1,6 +1,7 @@
 ArcWork::Application.routes.draw do
 
   get "home/index"
+
   # You can have the root of your site routed with "root"
   root 'home#index'
 
@@ -9,7 +10,7 @@ ArcWork::Application.routes.draw do
   resources :users
   resources :courses do
     resources :homeworks do
-      resources :solutions#, except: [:update, :destroy, :edit]
+      resources :solutions, except: [:show,:destroy]
     end
   end
 

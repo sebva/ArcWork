@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 20140314143313) do
     t.string   "title"
     t.text     "description"
     t.datetime "due_date"
-    t.string   "file_path"
+    t.string   "file"
     t.integer  "course_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -42,7 +42,10 @@ ActiveRecord::Schema.define(version: 20140314143313) do
 
   create_table "solutions", force: true do |t|
     t.datetime "date"
-    t.string   "file_path"
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
     t.text     "student_comment"
     t.text     "professor_comment"
     t.string   "mime"

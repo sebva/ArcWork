@@ -20,3 +20,7 @@
 @import "bootstrap/theme";
 
 //= require_tree .
+
+.panel-heading:hover {
+  cursor: pointer;
+}

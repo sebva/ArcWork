@@ -2,7 +2,7 @@ class CreateSolutions < ActiveRecord::Migration
   def change
     create_table :solutions do |t|
       t.datetime :date
-      t.string :file_path
+      t.attachment :file
       t.text :student_comment
       t.text :professor_comment
       t.string :mime
