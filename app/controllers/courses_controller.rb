@@ -39,8 +39,8 @@ class CoursesController < ApplicationController
 
   def create
     if(!current_user.nil? && current_user.isDean?)
-      @course = Course.create(params[:course].permit(:name, :start_year, :professor_id))
-      if @course.valid?
+      @course = Course.new(params[:course].permit(:name, :start_year, :professor_id))
+      if @course.save
         redirect_to action: "index"
 
       else
@@ -64,7 +64,8 @@ class CoursesController < ApplicationController
         redirect_to action: "index"
       else
         @course.errors.each do |attribute, error|
-          flash.now[:error] = Course.human_attribute_name(attribute) + " " +  error.to_s        end
+          flash.now[:error] = Course.human_attribute_name(attribute) + " " +  error.to_s
+        end
         @course.errors.clear
         @professors = User.where("rank = ?", User::RANK_PROFESSOR)
         render 'edit'
@@ -119,30 +120,40 @@ class CoursesController < ApplicationController
 
   def destroy_user_from_course
     if(!current_user.nil? && current_user.isProfessor?)
-      @course = Course.find(params[:course_id])
-      @user = User.find(params[:user_id])
+      @course = Course.find(params[:id])
+
+      @user = User.find(params[:user])
       @course.users.delete(@user)
+      redirect_to course_path(@course)
     else
       redirect_to root_url
     end
   end
 
   def new_user_to_course
-
+    @course = Course.find(params[:id])
+    @students = User.where("rank = ? AND id NOT IN (?)", User::RANK_STUDENT, @course.users.select(&:id))
+    render 'new_user_to_course'
   end
 
   def create_user_for_course
     if(!current_user.nil? && current_user.isProfessor?)
-      @course = Course.find(params[:course_id])
-      @user = User.find(params[:user_id])
-      if @course.users.add(@user)
-        redirect_to action: "index"
+
+      @course = Course.find(params[:id])
+      if params[:course].nil?
+        flash.now[:error] = "No Student selected"
+        redirect_to course_path(@course)
       else
-        render "new"
+
+        @user = User.find(params[:course]['last_user_id'])
+        if @course.users.append(@user)
+          redirect_to course_path(@course)
+        else
+          render "new"
+        end
       end
     else
       redirect_to root_url
     end
   end
-
 end

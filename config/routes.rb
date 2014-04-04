@@ -11,7 +11,13 @@ ArcWork::Application.routes.draw do
     resources :homeworks do
       resources :solutions#, except: [:update, :destroy, :edit]
     end
+    member do
+      post :create_user_for_course
+      delete :destroy_user_from_course
+      get :new_user_to_course
+    end
   end
+
 
 
   # The priority is based upon order of creation: first created -> highest priority.

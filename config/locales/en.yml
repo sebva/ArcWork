@@ -27,6 +27,8 @@
        course:
          name: "Name"
          start_year: "Start year"
+         last_user_id: "New student"
+
      errors:
        models:
          course:
