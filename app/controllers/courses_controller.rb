@@ -1,5 +1,6 @@
 class CoursesController < ApplicationController
   def index
+    #Check access rights
     if(!current_user.nil? && current_user.isDean?)
       couses_add_view_init
 
@@ -10,6 +11,7 @@ class CoursesController < ApplicationController
   end
 
   def show
+    #Check access rights
     if(!current_user.nil? && current_user.isProfessor?)
       @course = Course.find(params[:id])
       @users =   @course.users;
@@ -19,8 +21,10 @@ class CoursesController < ApplicationController
   end
 
   def edit
+    #Check access rights
     if(!current_user.nil? && current_user.isDean?)
       @course = Course.find(params[:id])
+      #Get all users with professor rank
       @professors = User.where("rank = ?", User::RANK_PROFESSOR)
     else
       redirect_to root_url
@@ -28,9 +32,12 @@ class CoursesController < ApplicationController
   end
 
   def new
+    #Check access rights
     if(!current_user.nil? && current_user.isDean?)
       @course = Course.new
+      #Get all users with professor rank
       @professors = User.where("rank = ?", User::RANK_PROFESSOR)
+      #Set the start year by default to the current year (school year starts 01.08)
       @course.start_year = Course.get_current_year
     else
       redirect_to root_url
@@ -38,16 +45,17 @@ class CoursesController < ApplicationController
   end
 
   def create
+    #Check access rights
     if(!current_user.nil? && current_user.isDean?)
       @course = Course.new(params[:course].permit(:name, :start_year, :professor_id))
       if @course.save
         redirect_to action: "index"
-
       else
         @course.errors.each do |attribute, error|
           flash.now[:error] = Course.human_attribute_name(attribute) + " " +  error.to_s
         end
         @course.errors.clear
+        #if error render new page again
         @professors = User.where("rank = ?", User::RANK_PROFESSOR)
         render "new"
       end
@@ -57,6 +65,7 @@ class CoursesController < ApplicationController
   end
 
   def update
+    #Check access rights
     if(!current_user.nil? && current_user.isDean?)
       @course = Course.find(params[:id])
 
@@ -89,7 +98,9 @@ class CoursesController < ApplicationController
 
   end
 
-
+  # initalisze required variables for add action
+  # Sets min_year, max_year and curr_year (for year dropdown list)
+  # Gets the courses for the current year
   def couses_add_view_init()
     @curr_year = params[:year]
     if params[:year].nil?
@@ -117,7 +128,7 @@ class CoursesController < ApplicationController
     @courses = Course.where(start_year: @curr_year)
   end
 
-
+  # Removes a students from a course
   def destroy_user_from_course
     if(!current_user.nil? && current_user.isProfessor?)
       @course = Course.find(params[:id])
@@ -130,12 +141,20 @@ class CoursesController < ApplicationController
     end
   end
 
+  # View for adding a student to a course
   def new_user_to_course
-    @course = Course.find(params[:id])
-    @students = User.where("rank = ? ",User::RANK_STUDENT)#AND id NOT IN (?)", User::RANK_STUDENT, @course.users.select("id"))
-    render 'new_user_to_course'
+
+    if(!current_user.nil? && current_user.isProfessor?)
+      @course = Course.find(params[:id])
+      @students = User.where("rank = ? ",User::RANK_STUDENT)
+      @students -= @course.users
+      render 'new_user_to_course'
+    else
+      redirect_to root_url
+    end
   end
 
+  # Add a student to a course
   def create_user_for_course
     if(!current_user.nil? && current_user.isProfessor?)
 
