@@ -25,6 +25,13 @@ class User < ActiveRecord::Base
     end
   end
 
+  def name_not_null
+    if name.nil? || name.empty?
+      return email.html_safe
+    end
+    return name
+  end
+
   def isStudent?
     self.rank == RANK_STUDENT
   end

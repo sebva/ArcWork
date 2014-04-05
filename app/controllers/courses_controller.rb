@@ -132,7 +132,7 @@ class CoursesController < ApplicationController
 
   def new_user_to_course
     @course = Course.find(params[:id])
-    @students = User.where("rank = ? AND id NOT IN (?)", User::RANK_STUDENT, @course.users.select(&:id))
+    @students = User.where("rank = ? ",User::RANK_STUDENT)#AND id NOT IN (?)", User::RANK_STUDENT, @course.users.select("id"))
     render 'new_user_to_course'
   end
 

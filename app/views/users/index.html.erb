@@ -10,12 +10,15 @@
     </thead>
     <tbody>
     <% @users.each do |user| %>
-        <% user.name = user.email if user.name.empty? %>
+        <% user.name = user.email if user.name.nil? || user.name.empty? %>
         <tr>
             <td><%= link_to user.name, edit_user_path(user) %></td>
             <td><%= link_to user.email, 'mailto:' + user.email %></td>
             <td><%= user.rank_as_string %></td>
             <td>
+                <%= link_to edit_user_path(user), :class => 'btn btn-primary btn-mini' do %>
+                    <span class="glyphicon glyphicon-pencil"></span>
+                <% end %>
                 <%= link_to content_tag('span', '', class: 'glyphicon glyphicon-trash'), user, class: 'btn btn-danger', confirm: "Do you really want to delete '#{user.name}' ?", method: :delete %>
             </td>
         </tr>

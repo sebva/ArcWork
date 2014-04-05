@@ -1,14 +1,15 @@
 <h1><%= @course.name %> students</h1>
 <%= link_to new_user_to_course_course_path, :class => 'btn btn-primary btn-mini' do %>
-    <span class="glyphicon glyphicon-plus"></span>
+    <span class="glyphicon glyphicon-plus"></span> Add student to this course
 <% end %>
+<br /><br />
 <table class="searchable_datatable">
     <thead>
     <tr>
-        <th>#</th>
+
         <th>Name</th>
         <th>Email</th>
-        <th>Delete</th>
+        <th></th>
     </tr>
     </thead>
     <tbody>
@@ -18,7 +19,6 @@
 
     <% @users.each do |user| %>
         <tr>
-            <td><%= user.id %></td>
             <td><%= user.name %></td>
             <td><%= user.email %></td>
             <td>
