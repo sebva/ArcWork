@@ -50,6 +50,7 @@
                                 <%=link_to(image_tag('/system/icons/'+sol.mime+'.png', size: '128x128', alt: 'File Image'), sol.file.url) %>
                             </div>
                             <div class="form-group">
+                                <i class="glyphicon glyphicon glyphicon-download-alt"></i>
                                 <%= link_to 'Download', sol.file.url %>
                             </div>
                         <%end%>
@@ -70,8 +71,16 @@
                         <% end %>
                     <% else %>
                         <%= form_for [@course,@homework,sol] do |f| %>
-                            <%= f.text_area :professor_comment, :class => 'form-control'%>
-                            <%= f.submit 'Comment', :class => 'btn btn-primary'%>
+                            <div class="form-group">
+                                <%= f.text_area :professor_comment, :class => 'form-control'%>
+                            </div>
+                            <div class="form-group col">
+                                <% if sol.professor_comment <=> '' %>
+                                    <%= f.submit 'Edit', class: 'btn btn-warning pull-right' %>
+                                <% else %>
+                                    <%= f.submit 'Comment', :class => 'btn btn-primary'%>
+                                <% end %>
+                            </div>
                         <% end %>
                     <% end %>
                 </div>

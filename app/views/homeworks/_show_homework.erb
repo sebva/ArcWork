@@ -3,7 +3,17 @@
 <div class="col-sm-4">
     <div class="col-item">
         <div class="photo">
-            <img src="http://placehold.it/350x260" class="img-responsive" alt="a" />
+
+
+            <%if @homework.file.path.nil?%>
+                <div class="form-group">
+                    <%= image_tag('/system/icons/'+@extension+'.png', size: '128x128', class: 'img-responsive', alt: 'File Image')%>
+                </div>
+            <%else%>
+                <div class="form-group">
+                    <%=link_to(image_tag('/system/icons/'+@extension+'.png', size: '128x128', class: 'img-responsive', alt: 'File Image'), @homework.file.url) %>
+                </div>
+            <%end%>
         </div>
         <div class="info">
             <div class="row">
@@ -11,17 +21,16 @@
                     <h4><%= @homework.title %></h4>
                 </div>
                 <div class="rating col-xs-6">
-                    <%# TODO: Put real values here %>
-                    <h5>34 MB</h5>
-                    <h5>Word file</h5>
+                    <h5><%= number_to_human_size(@homework.file.size) -%> </h5>
+                    <h5><%= @extension -%> file</h5>
                 </div>
             </div>
             <div class="separator clear-left">
                 <p class="btn-add">
-                    <i class="glyphicon glyphicon-th-list"></i><%= link_to "Solutions", course_homework_solutions_url(@course, @homework) %>
+                    <i class="glyphicon glyphicon-th-list"></i><%= link_to 'Solutions', course_homework_solutions_url(@course, @homework) %>
                 </p>
                 <p class="btn-details">
-                    <i class="glyphicon glyphicon glyphicon-download-alt"></i><a href="#">Download</a>
+                    <i class="glyphicon glyphicon glyphicon-download-alt"></i><%= link_to 'Download', @homework.file.url %>
                 </p>
             </div>
             <div class="clearfix">

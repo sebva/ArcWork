@@ -30,8 +30,8 @@ class SolutionsController < ApplicationController
     @solution.version = @homework.solutions.where(user_id: @user.id).size+1
 
     # TODO devise crash if there is an unknown file etension
-    extension = @solution.file.nil? ? File.extname(@solution.file.path)[1..-1] : 'txt'
-    @solution.mime = extension == '' ? 'default' : extension
+    extension = @solution.file.nil? ? 'txt' : File.extname(@solution.file.path)[1..-1]
+    @solution.mime = extension
 
     if @solution.save
       redirect_to [@course,@homework,Solution]

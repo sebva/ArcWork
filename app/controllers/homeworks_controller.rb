@@ -15,6 +15,8 @@ class HomeworksController < ApplicationController
     @course = Course.find(params[:course_id])
     @homework = Homework.find(params[:id])
 
+    @extension = @homework.file.path.nil? ? 'txt' : File.extname(@homework.file.path)[1..-1]
+
     if current_user.isProfessor?
       users = @homework.solutions.select(:user_id).distinct
       @solutions = []
