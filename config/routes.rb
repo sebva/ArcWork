@@ -18,6 +18,12 @@ ArcWork::Application.routes.draw do
       get :new_user_to_course
     end
   end
+  resource :homeworks do
+    collection do
+      get :index_homework_to_do
+      get :index_homework_done
+    end
+  end
 
 
 

@@ -3,7 +3,7 @@ class HomeworksController < ApplicationController
   before_filter :authenticate_user!
 
   def index
-    if current_user.isProfessor? or current_user.isStudent?
+    if current_user.isProfessor?
       @course = Course.find(params[:course_id])
       @homework = @course.homeworks
     else
@@ -88,10 +88,39 @@ class HomeworksController < ApplicationController
     end
   end
 
+  def index_homework_to_do
+    if current_user.isStudent?
+      @title = "Homework to do"
+      @homework = Array.new
+      for course in current_user.courses
+        @homework += course.homeworks.where("due_date >= ?", Time.now)
+      end
+
+    else
+      redirect_to home_index_path
+    end
+  end
+
+  def index_homework_done
+    if current_user.isStudent?
+      @title = "Done Homework"
+
+      @homework = Array.new
+      for course in current_user.courses
+        @homework += course.homeworks.where("due_date < ?", Time.now)
+      end
+      render "index_homework_to_do"
+    else
+      redirect_to home_index_path
+    end
+  end
+
   private
 
   def get_params
     params[:homework].permit(:title, :description, :due_date, :file)
   end
+
+
 
 end

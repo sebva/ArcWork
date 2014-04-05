@@ -1,0 +1,22 @@
+<h1><%= @title %></h1>
+
+<table class="searchable_datatable">
+    <thead>
+    <tr>
+        <th>Title</th>
+        <th>Course</th>
+        <th>Deadline</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <% @homework.each do |hw| %>
+        <tr>
+            <td><%= link_to hw.title, [hw.course, hw] %></td>
+            <td><%= link_to hw.course.name, hw.course %></td>
+            <td><%= hw.due_date %></td>
+
+        </tr>
+    <% end %>
+    </tbody>
+</table>

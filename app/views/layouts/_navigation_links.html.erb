@@ -9,7 +9,7 @@
 
         <%= render 'layouts/professor_navigation_links' %>
 
-    <% elsif (current_user.isProfessor?) %>
+    <% elsif (current_user.isStudent?) %>
         <%= render 'layouts/user_navigation_links' %>
     <% end %>
 
