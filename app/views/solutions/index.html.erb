@@ -12,7 +12,7 @@
             </div>
             <div id="new" class="panel-collapse collapse">
                 <div class="panel-body">
-                    <%= render "new" %>
+                    <%= render 'new' %>
                 </div>
             </div>
         </div>
@@ -31,22 +31,28 @@
                 Version : <%= sol.version %>
             </h4>
         </div>
-        <div id="<%=index%>" class="panel-collapse collapse <%= "in" if index==0%>">
+        <div id="<%=index%>" class="panel-collapse collapse <%= 'in' if index==0%>">
             <div class="panel-body">
                 <div class="col-md-3">
                     <div class="form-group">
                         Student : <%= User.find(sol.user_id).email %>
                     </div>
                     <div class="form-group">
-                        Last update : <%= sol.updated_at.strftime("%d.%m.%Y")  %>
+                        Last update : <%= sol.updated_at.strftime('%d.%m.%Y')  %>
                     </div>
-                    <div class="form-group">
-                        MIME PHOTO <%= sol.mime %>
-                        <%= link_to "Download", sol.file.url %>
-                    </div>
-                    <div class="form-group">
-                        <!--<%= image_tag sol.file.url %>-->
-                        <img src="" alt="" class="img-thumbnail">
+                    <div class="text-center">
+                        <%if sol.file.path.nil?%>
+                            <div class="form-group">
+                                <%= image_tag('/system/icons/'+sol.mime+'.png', size: '128x128', alt: 'File Image')%>
+                            </div>
+                        <%else%>
+                            <div class="form-group">
+                                <%=link_to(image_tag('/system/icons/'+sol.mime+'.png', size: '128x128', alt: 'File Image'), sol.file.url) %>
+                            </div>
+                            <div class="form-group">
+                                <%= link_to 'Download', sol.file.url %>
+                            </div>
+                        <%end%>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -57,7 +63,7 @@
                     <h3>Professor description</h3>
                     <!--if professor => can change else like upper-->
                     <% if @user.isStudent? %>
-                        <% if sol.professor_comment <=> "" %>
+                        <% if sol.professor_comment <=> '' %>
                             <%= sol.professor_comment %>
                         <% else %>
                             The professor hasn't comment yet
@@ -65,7 +71,7 @@
                     <% else %>
                         <%= form_for [@course,@homework,sol] do |f| %>
                             <%= f.text_area :professor_comment, :class => 'form-control'%>
-                            <%= f.submit "Comment", :class => 'btn btn-primary'%>
+                            <%= f.submit 'Comment', :class => 'btn btn-primary'%>
                         <% end %>
                     <% end %>
                 </div>

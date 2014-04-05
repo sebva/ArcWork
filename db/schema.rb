@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140314143313) do
+ActiveRecord::Schema.define(version: 20140404190720) do
 
   create_table "courses", force: true do |t|
     t.string   "name"
@@ -32,10 +32,13 @@ ActiveRecord::Schema.define(version: 20140314143313) do
     t.string   "title"
     t.text     "description"
     t.datetime "due_date"
-    t.string   "file"
     t.integer  "course_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
   end
 
   add_index "homeworks", ["course_id"], name: "index_homeworks_on_course_id", using: :btree
