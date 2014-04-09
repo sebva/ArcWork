@@ -4,6 +4,9 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  validates :password,              :presence => true,    :if => :password_required?
+  validates :password_confirmation, :presence => true,    :if => :password_required?
+
   has_many :solutions
   has_and_belongs_to_many :courses
   has_many :courses_professor, :class_name => 'Course', :foreign_key => 'professor_id'
@@ -48,4 +51,13 @@ class User < ActiveRecord::Base
     return self.courses_professor.where("start_year = ?", Course.get_current_year)
   end
 
+  def password_required?
+    # If resetting the password
+    return true if reset_password_token.present? && reset_password_period_valid?
+
+    # If the person already has a pass, only validate if they are updating pass
+    if !encrypted_password.blank?
+      password.present? || password_confirmation.present?
+    end
+  end
 end

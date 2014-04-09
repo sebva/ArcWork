@@ -7,7 +7,12 @@ ArcWork::Application.routes.draw do
 
   devise_for :users
 
-  resources :users, except: [:new, :create]
+  resources :users, except: [:new, :create]do
+    member do
+      get :edit_user_options
+      patch :update_user_options
+    end
+  end
   resources :courses do
     resources :homeworks do
       resources :solutions, except: [:show,:destroy]
@@ -24,6 +29,8 @@ ArcWork::Application.routes.draw do
       get :index_homework_done
     end
   end
+
+
 
 
 

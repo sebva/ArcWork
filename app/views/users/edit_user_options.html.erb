@@ -1,0 +1,26 @@
+<%= form_for @user, :url => url_for(:controller => 'users', :action => 'update_user_options') do |f| %>
+
+    <div class="form-group">
+        <label for="user_name">Name</label>
+        <%= f.text_field :name, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+        <label for="user_email">E-mail</label>
+        <%= f.email_field :email, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+        <label for="user_password">Password</label><i>(leave blank if you don't want to change it)</i>
+        <%= f.password_field :password, :autocomplete =>'off', class: 'form-control' %>
+    </div>
+    <div class="form-group">
+        <label for="user_password_confirmation">Password confirmation</label>
+        <%= f.password_field :password_confirmation, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+        <label for="user_current_password">Current password</label><i>(we need your current password to confirm your changes)</i>
+        <%= f.password_field :current_password, class: 'form-control' %>
+    </div>
+
+
+    <%= f.submit "Save", class:'btn btn-primary' %>
+<% end %>
