@@ -1,7 +1,7 @@
 <h1>Solutions of <%= @homework.title %></h1>
 <p>
-    <%= link_to edit_course_homework_url(@course, @homework), class: "btn btn-default" do %>
-        <i class="glyphicon glyphicon-edit"></i> Edit homework
+    <%= link_to edit_course_homework_url(@course, @homework), class: "btn btn-warning" do %>
+        <i class="glyphicon glyphicon-pencil"></i> Edit homework
     <% end %>
 </p>
 <table class="searchable_datatable">
@@ -14,7 +14,7 @@
     <tbody>
     <% @solutions.each do |solution| %>
         <tr>
-            <td><%= link_to solution.user.name, course_homework_solutions_url(@course, @homework, user_id: solution.user.id) %></td>
+            <td><%= link_to solution.user.name_not_null, course_homework_solutions_url(@course, @homework, user_id: solution.user.id) %></td>
             <td><%= solution.date %></td>
         </tr>
     <% end %>

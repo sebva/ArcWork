@@ -13,7 +13,7 @@
     <% @homework.each do |hw| %>
         <tr>
             <td><%= link_to hw.title, [hw.course, hw] %></td>
-            <td><%= link_to hw.course.name, hw.course %></td>
+            <td><%= hw.course.name %></td>
             <td><%= hw.due_date %></td>
 
         </tr>

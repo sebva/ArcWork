@@ -35,6 +35,7 @@ class SolutionsController < ApplicationController
     @solution.homework_id = @homework.id
     @solution.user_id = @user.id
     @solution.version = @homework.solutions.where(user_id: @user.id).size+1
+    @solution.date = Time.now
 
     extension = @solution.file.path.nil? ? 'txt' : File.extname(@solution.file.path)[1..-1]
     @solution.mime = extension
@@ -51,7 +52,7 @@ class SolutionsController < ApplicationController
     @homework = Homework.find(params[:homework_id])
     @solution = Solution.find(params[:id])
     if @solution.update(get_params)
-      redirect_to [@course, @homework, Solution]
+      redirect_to [@course, @homework, Solution], :flash => {:notice => "Solution successfully commented"}
     else
       render 'solutions'
     end

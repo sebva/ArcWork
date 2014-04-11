@@ -1,5 +1,20 @@
 <h1>Courses</h1>
 
+    <div class="form-group">
+        <label for="year_select">Academic year</label>
+        <select class="form-control" id="year_select" onchange="location = this.options[this.selectedIndex].value;">
+            <% for y in @min_year..@max_year %>
+                <option value="?year=<%= y %>" <%= ' selected' if @curr_year == y %>><%= y %> / <%= y+1 %></option>
+            <% end %>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <%= link_to new_course_path, :class => 'btn btn-primary' do %>
+            <span class="glyphicon glyphicon-plus"></span> New course
+        <% end %>
+    </div>
+
     <table class="searchable_datatable">
         <thead>
         <tr>
@@ -8,27 +23,17 @@
             <th>Actions</th>
         </tr>
         </thead>
-        <tbody>
-        <select onchange="location = this.options[this.selectedIndex].value;">
-            <% for y in @min_year..@max_year %>
-                <option value="?year=<%= y %>" <%= ' selected' if @curr_year == y %>><%= y %> / <%= y+1 %></option>
-            <% end %>
-        </select>
-        <br /><br />
-        <%= link_to new_course_path, :class => 'btn btn-primary btn-mini' do %>
-            <span class="glyphicon glyphicon-plus"></span> New Course
-        <% end %>
-        <br /><br />
 
+        <tbody>
         <% @courses.each do |course| %>
         <tr>
             <td><%= link_to course.name, edit_course_path(course) %></td>
             <td><%= link_to course.professor.name_not_null, edit_user_path(course.professor) %></td>
             <td>
-                <%= link_to edit_course_path(course), :class => 'btn btn-warning btn-mini' do %>
+                <%= link_to edit_course_path(course), :class => 'btn btn-warning btn-sm' do %>
                     <span class="glyphicon glyphicon-pencil"></span>
                 <% end %>
-                <%= link_to course_path(course), :method => :delete, :class => 'btn btn-danger btn-mini', confirm:"Are you sure you want to delete the course "+course.name do %>
+                <%= link_to course_path(course), :method => :delete, :class => 'btn btn-danger btn-sm', confirm:"Are you sure you want to delete the course "+course.name do %>
                     <span class="glyphicon glyphicon-trash"></span>
                 <% end %>
             </td>

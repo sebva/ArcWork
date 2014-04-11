@@ -15,7 +15,7 @@ class HomeworksController < ApplicationController
     @course = Course.find(params[:course_id])
     @homework = Homework.find(params[:id])
 
-    @extension = @homework.file.path.nil? ? 'txt' : File.extname(@homework.file.path)[1..-1]
+    @extension = @homework.file.path.nil? ? 'No attached' : File.extname(@homework.file.path)[1..-1]
 
     if current_user.isProfessor?
       users = @homework.solutions.select(:user_id).distinct
@@ -37,6 +37,8 @@ class HomeworksController < ApplicationController
 
     @course = Course.find(params[:course_id])
     @homework = Homework.new
+    @homework.due_date = (Time.zone.now + 8.days).midnight - 1.seconds
+
     if not current_user.isProfessor?
       redirect_to course_homeworks_path(@course)
     end

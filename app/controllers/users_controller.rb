@@ -22,10 +22,9 @@ class UsersController < ApplicationController
   def update_user_options
     @user = User.find(current_user.id)
     if @user.update(user_params)
-      # Sign in the user by passing validation in case his password changed
-      sign_in @user, :bypass => true
-      redirect_to root_path
+      redirect_to root_path, :flash => { :notice => 'Account information changed successfully' }
     else
+      flash[:message] = 'Please check your input'
       render "edit_user_options"
     end
 

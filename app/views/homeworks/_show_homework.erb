@@ -5,11 +5,7 @@
         <div class="photo">
 
 
-            <%if @homework.file.path.nil?%>
-                <div class="form-group">
-                    <%= image_tag('/system/icons/'+@extension+'.png', size: '128x128', class: 'img-responsive', alt: 'File Image')%>
-                </div>
-            <%else%>
+            <% unless @homework.file.path.nil?%>
                 <div class="form-group">
                     <%=link_to(image_tag('/system/icons/'+@extension+'.png', size: '128x128', class: 'img-responsive', alt: 'File Image'), @homework.file.url) %>
                 </div>
@@ -29,9 +25,15 @@
                 <p class="btn-add">
                     <i class="glyphicon glyphicon-th-list"></i><%= link_to 'Solutions', course_homework_solutions_url(@course, @homework) %>
                 </p>
+                <% if @homework.file.path.nil? %>
+                <p class="btn-details" style="cursor: not-allowed; color: #b8b8b8; ">
+                    <i class="glyphicon glyphicon glyphicon-download-alt"></i> Download
+                </p>
+                <% else %>
                 <p class="btn-details">
                     <i class="glyphicon glyphicon glyphicon-download-alt"></i><%= link_to 'Download', @homework.file.url %>
                 </p>
+                <% end %>
             </div>
             <div class="clearfix">
             </div>

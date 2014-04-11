@@ -9,5 +9,5 @@
     <%= f.text_field :name %>
     <%= f.text_field :start_year %>
     <%= f.collection_select :professor_id, @professors, :id,:name_not_null, {class: "form-control"} %>
-    <%= f.submit  "Apply", class: "btn btn-success" %>
+    <%= f.submit  "Apply", class: "btn btn-primary" %>
 <% end %>
