@@ -19,14 +19,14 @@ server '157.26.83.46', user: 'devweb', roles: %w{web app}, my_property: :my_valu
 
 # Upload local configuration to server
 namespace :deploy do
-  desc "Upload configuration"
+  desc 'Upload configuration'
   task :upload_configuration do
     on roles(:web, :app, :db) do
       upload!(File.expand_path('../../arcwork-conf.yml', __FILE__), "#{fetch(:release_path)}/config/arcwork-conf.yml")
     end
   end
 
-  before "deploy:updated", :upload_configuration
+  before 'deploy:updated', :upload_configuration
 end
 
 # you can set custom ssh options

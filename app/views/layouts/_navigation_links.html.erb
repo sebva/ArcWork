@@ -1,15 +1,15 @@
 <%# add navigation links to this file %>
 
-<li class="<%= is_active('home', 'index') %>"><%= link_to "Home", root_path %></li>
+<li class="<%= is_active('home', 'index') %>"><%= link_to 'Home', root_path %></li>
 
-<% if (!current_user.nil?) %>
-    <% if (current_user.isDean?) %>
+<% if !current_user.nil? %>
+    <% if current_user.is_dean? %>
         <%= render 'layouts/dean_navigation_links' %>
-    <% elsif (current_user.isProfessor?) %>
+    <% elsif current_user.is_professor? %>
 
         <%= render 'layouts/professor_navigation_links' %>
 
-    <% elsif (current_user.isStudent?) %>
+    <% elsif current_user.is_student? %>
         <%= render 'layouts/user_navigation_links' %>
     <% end %>
 

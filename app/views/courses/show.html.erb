@@ -20,7 +20,7 @@
             <td><%= user.name %></td>
             <td><%= link_to user.email, 'mailto:' + user.email %></td>
             <td>
-                <%= link_to destroy_user_from_course_course_path(@course,:user => user),  :method => :delete, :class => 'btn btn-danger btn-sm', confirm:"Are you sure you want to remove the user "+user.name + " from this course" do %>
+                <%= link_to destroy_user_from_course_course_path(@course,:user => user),  :method => :delete, :class => 'btn btn-danger btn-sm', confirm: 'Are you sure you want to remove the user '+user.name + ' from this course' do %>
                     <span class="glyphicon glyphicon-minus"></span>
                 <% end %>
             </td>

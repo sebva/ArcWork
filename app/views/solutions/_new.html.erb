@@ -1,6 +1,6 @@
 <!--check if it's a student ?-->
 
-<%= form_for @solution, url: {action: "create"}, :html => { :multipart => true } do |f| %>
+<%= form_for @solution, url: {action: 'create'}, :html => { :multipart => true } do |f| %>
 
     <div class="form-group">
         <label for="solution_student_comment">Student comment</label>
@@ -10,6 +10,6 @@
         <label for="solution_file">File</label>
         <%= f.file_field :file, class: 'form-control' %>
     </div>
-    <%= f.submit "Submit solution", class: 'btn btn-primary' %>
+    <%= f.submit 'Submit solution', class: 'btn btn-primary' %>
 
 <% end %>

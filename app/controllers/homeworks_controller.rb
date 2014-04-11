@@ -3,7 +3,7 @@ class HomeworksController < ApplicationController
   before_filter :authenticate_user!
 
   def index
-    if current_user.isProfessor?
+    if current_user.is_professor?
       @course = Course.find(params[:course_id])
       @homework = @course.homeworks
     else
@@ -17,16 +17,16 @@ class HomeworksController < ApplicationController
 
     @extension = @homework.file.path.nil? ? 'No attached' : File.extname(@homework.file.path)[1..-1]
 
-    if current_user.isProfessor?
+    if current_user.is_professor?
       users = @homework.solutions.select(:user_id).distinct
       @solutions = []
       for user in users do
-        last_solution = Solution.where("user_id = ?", user.user_id).sort_by { |sol| sol.date }.reverse.first
+        last_solution = Solution.where('user_id = ?', user.user_id).sort_by { |sol| sol.date }.reverse.first
         @solutions.append(last_solution)
       end
 
       render '_show_uniq_solutions'
-    elsif current_user.isStudent?
+    elsif current_user.is_student?
       render '_show_homework'
     else
       redirect_to home_index_path
@@ -39,7 +39,7 @@ class HomeworksController < ApplicationController
     @homework = Homework.new
     @homework.due_date = (Time.zone.now + 8.days).midnight - 1.seconds
 
-    if not current_user.isProfessor?
+    unless current_user.is_professor?
       redirect_to course_homeworks_path(@course)
     end
   end
@@ -47,13 +47,13 @@ class HomeworksController < ApplicationController
   def edit
     @course = Course.find(params[:course_id])
     @homework = Homework.find(params[:id])
-    if not current_user.isProfessor?
+    unless current_user.isProfessor?
       redirect_to course_homeworks_path(@course)
     end
   end
 
   def create
-    if current_user.isProfessor?
+    if current_user.is_professor?
       @course = Course.find(params[:course_id])
       @homework = Homework.new(get_params)
       @homework.course = @course
@@ -68,7 +68,7 @@ class HomeworksController < ApplicationController
   end
 
   def update
-    if current_user.isProfessor?
+    if current_user.is_professor?
       @course = Course.find(params[:course_id])
       @homework = Homework.find(params[:id])
       if @homework.update(get_params)
@@ -82,7 +82,7 @@ class HomeworksController < ApplicationController
   end
 
   def destroy
-    if current_user.isProfessor?
+    if current_user.is_professor?
       @homework = Homework.find(params[:id])
       @homework.destroy
       course = Course.find(params[:course_id])
@@ -93,11 +93,11 @@ class HomeworksController < ApplicationController
   end
 
   def index_homework_to_do
-    if current_user.isStudent?
-      @title = "Homework to do"
+    if current_user.is_student?
+      @title = 'Homework to do'
       @homework = Array.new
       for course in current_user.courses
-        @homework += course.homeworks.where("due_date >= ?", Time.now)
+        @homework += course.homeworks.where('due_date >= ?', Time.now)
       end
 
     else
@@ -106,14 +106,14 @@ class HomeworksController < ApplicationController
   end
 
   def index_homework_done
-    if current_user.isStudent?
-      @title = "Past homework"
+    if current_user.is_student?
+      @title = 'Past homework'
 
       @homework = Array.new
       for course in current_user.courses
-        @homework += course.homeworks.where("due_date < ?", Time.now)
+        @homework += course.homeworks.where('due_date < ?', Time.now)
       end
-      render "index_homework_to_do"
+      render 'index_homework_to_do'
     else
       redirect_to home_index_path
     end

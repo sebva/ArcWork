@@ -1,5 +1,5 @@
 <%= bootstrap_form_for @course , :url => { :action => :create_user_for_course} , :method => :POST do |f| %>
 
-    <%= f.collection_select :last_user_id, @students, :id, :name_not_null, {class: "form-control"} %>
-    <%= f.submit "Add student", class: "btn btn-primary" %>
+    <%= f.collection_select :last_user_id, @students, :id, :name_not_null, {class: 'form-control'} %>
+    <%= f.submit 'Add student', class: 'btn btn-primary' %>
 <% end %>

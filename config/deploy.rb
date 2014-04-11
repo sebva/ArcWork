@@ -3,11 +3,11 @@ lock '3.1.0'
 
 set :application, 'arcwork'
 set :repo_url, 'git@github.com:sebyx31/ArcWork.git'
-set :deploy_to, "/home/devweb/arcwork"
+set :deploy_to, '/home/devweb/arcwork'
 set :scm, :git
-set :branch, "master"
-set :rails_env, "production"
-set :bundle_gemfile, "Gemfile"
+set :branch, 'master'
+set :rails_env, 'production'
+set :bundle_gemfile, 'Gemfile'
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
@@ -36,9 +36,9 @@ set :linked_dirs, %w{tmp}
 # Default value for default_env is {}
 set :default_env,
     {
-        "http_proxy" => "http://proxy.he-arc.ch:8080",
+        'http_proxy' => 'http://proxy.he-arc.ch:8080',
 
-        "https_proxy" => "https://proxy.he-arc.ch:8080"
+        'https_proxy' => 'https://proxy.he-arc.ch:8080'
 
     }
 

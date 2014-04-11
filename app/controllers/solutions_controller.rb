@@ -10,10 +10,9 @@ class SolutionsController < ApplicationController
     #if professor show all solutions
     @user = User.find(current_user.id)
 
-    if @user.isProfessor?
-      # TODOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOoo
+    if @user.is_professor?
       @solutions = @homework.solutions
-    elsif @user.isStudent?
+    elsif @user.is_student?
       @solutions = []
       @solutions = @homework.solutions.where(user_id: @user.id)
     else
@@ -27,7 +26,7 @@ class SolutionsController < ApplicationController
     @course = @homework.course
     @user = current_user
 
-    return redirect_to root_path, :flash => {:error => 'Restricted area'} unless @user.isStudent?
+    return redirect_to root_path, :flash => {:error => 'Restricted area'} unless @user.is_student?
     return redirect_to [@course,@homework,Solution], :flash => {:error => 'Submission period is finished'} if @homework.due_date < Time.now
 
 
@@ -51,11 +50,10 @@ class SolutionsController < ApplicationController
     @course = Course.find(params[:course_id])
     @homework = Homework.find(params[:homework_id])
     @solution = Solution.find(params[:id])
-    if @solution.update(get_params)
-      redirect_to [@course, @homework, Solution], :flash => {:notice => "Solution successfully commented"}
-    else
-      render 'solutions'
-    end
+
+    redirect_to [@course, @homework, Solution], :flash =>
+        @solution.update(get_params) ? {:notice => 'Solution successfully commented'} : {:error => 'Failed to update solution'}
+
   end
 
   private

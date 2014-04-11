@@ -1,7 +1,7 @@
 class CoursesController < ApplicationController
   def index
     #Check access rights
-    if(!current_user.nil? && current_user.isDean?)
+    if !current_user.nil? && current_user.is_dean?
       couses_add_view_init
 
     else
@@ -12,9 +12,9 @@ class CoursesController < ApplicationController
 
   def show
     #Check access rights
-    if(!current_user.nil? && current_user.isProfessor?)
+    if !current_user.nil? && current_user.is_professor?
       @course = Course.find(params[:id])
-      @users =   @course.users;
+      @users =   @course.users
     else
       redirect_to root_url
     end
@@ -22,10 +22,10 @@ class CoursesController < ApplicationController
 
   def edit
     #Check access rights
-    if(!current_user.nil? && current_user.isDean?)
+    if !current_user.nil? && current_user.is_dean?
       @course = Course.find(params[:id])
       #Get all users with professor rank
-      @professors = User.where("rank = ?", User::RANK_PROFESSOR)
+      @professors = User.where('rank = ?', User::RANK_PROFESSOR)
     else
       redirect_to root_url
     end
@@ -33,10 +33,10 @@ class CoursesController < ApplicationController
 
   def new
     #Check access rights
-    if(!current_user.nil? && current_user.isDean?)
+    if !current_user.nil? && current_user.is_dean?
       @course = Course.new
       #Get all users with professor rank
-      @professors = User.where("rank = ?", User::RANK_PROFESSOR)
+      @professors = User.where('rank = ?', User::RANK_PROFESSOR)
       #Set the start year by default to the current year (school year starts 01.08)
       @course.start_year = Course.get_current_year
     else
@@ -46,18 +46,18 @@ class CoursesController < ApplicationController
 
   def create
     #Check access rights
-    if(!current_user.nil? && current_user.isDean?)
+    if !current_user.nil? && current_user.is_dean?
       @course = Course.new(params[:course].permit(:name, :start_year, :professor_id))
       if @course.save
-        redirect_to action: "index"
+        redirect_to action: 'index'
       else
         @course.errors.each do |attribute, error|
-          flash.now[:error] = Course.human_attribute_name(attribute) + " " +  error.to_s
+          flash.now[:error] = Course.human_attribute_name(attribute) + ' ' +  error.to_s
         end
         @course.errors.clear
         #if error render new page again
-        @professors = User.where("rank = ?", User::RANK_PROFESSOR)
-        render "new"
+        @professors = User.where('rank = ?', User::RANK_PROFESSOR)
+        render 'new'
       end
     else
       redirect_to root_url
@@ -66,17 +66,17 @@ class CoursesController < ApplicationController
 
   def update
     #Check access rights
-    if(!current_user.nil? && current_user.isDean?)
+    if !current_user.nil? && current_user.is_dean?
       @course = Course.find(params[:id])
 
       if @course.update(params[:course].permit(:name, :start_year, :professor_id))
-        redirect_to action: "index"
+        redirect_to action: 'index'
       else
         @course.errors.each do |attribute, error|
-          flash.now[:error] = Course.human_attribute_name(attribute) + " " +  error.to_s
+          flash.now[:error] = Course.human_attribute_name(attribute) + ' ' +  error.to_s
         end
         @course.errors.clear
-        @professors = User.where("rank = ?", User::RANK_PROFESSOR)
+        @professors = User.where('rank = ?', User::RANK_PROFESSOR)
         render 'edit'
       end
     else
@@ -85,12 +85,12 @@ class CoursesController < ApplicationController
   end
 
   def destroy
-    if(!current_user.nil? && current_user.isDean?)
+    if !current_user.nil? && current_user.is_dean?
       @course = Course.find(params[:id])
       if @course.destroy
-        redirect_to action: "index"
+        redirect_to action: 'index'
       else
-        render 'delete'
+        redirect_to @course, :flash => { :error => 'Failed to delete course' }
       end
     else
       redirect_to root_url
@@ -101,7 +101,7 @@ class CoursesController < ApplicationController
   # initalisze required variables for add action
   # Sets min_year, max_year and curr_year (for year dropdown list)
   # Gets the courses for the current year
-  def couses_add_view_init()
+  def couses_add_view_init
     @curr_year = params[:year]
     if params[:year].nil?
       @curr_year = Course.get_current_year
@@ -109,7 +109,7 @@ class CoursesController < ApplicationController
       @curr_year =params[:year].to_i
     end
 
-    @min_year = Course.minimum("start_year")
+    @min_year = Course.minimum('start_year')
     if  @min_year.nil?
       @min_year = Course.get_current_year
     else
@@ -118,7 +118,7 @@ class CoursesController < ApplicationController
     @min_year = Course.get_current_year if @min_year > Course.get_current_year
 
 
-    @max_year = Course.maximum("start_year")
+    @max_year = Course.maximum('start_year')
     if  @max_year.nil?
       @max_year = Course.get_current_year
     else
@@ -130,7 +130,7 @@ class CoursesController < ApplicationController
 
   # Removes a students from a course
   def destroy_user_from_course
-    if(!current_user.nil? && current_user.isProfessor?)
+    if !current_user.nil? && current_user.is_professor?
       @course = Course.find(params[:id])
 
       @user = User.find(params[:user])
@@ -144,9 +144,9 @@ class CoursesController < ApplicationController
   # View for adding a student to a course
   def new_user_to_course
 
-    if(!current_user.nil? && current_user.isProfessor?)
+    if !current_user.nil? && current_user.is_professor?
       @course = Course.find(params[:id])
-      @students = User.where("rank = ? ",User::RANK_STUDENT)
+      @students = User.where('rank = ? ',User::RANK_STUDENT)
       @students -= @course.users
       render 'new_user_to_course'
     else
@@ -156,11 +156,11 @@ class CoursesController < ApplicationController
 
   # Add a student to a course
   def create_user_for_course
-    if(!current_user.nil? && current_user.isProfessor?)
+    if !current_user.nil? && current_user.is_professor?
 
       @course = Course.find(params[:id])
       if params[:course].nil?
-        flash.now[:error] = "No Student selected"
+        flash.now[:error] = 'No Student selected'
         redirect_to course_path(@course)
       else
 
@@ -168,7 +168,7 @@ class CoursesController < ApplicationController
         if @course.users.append(@user)
           redirect_to course_path(@course)
         else
-          render "new"
+          render 'new'
         end
       end
     else

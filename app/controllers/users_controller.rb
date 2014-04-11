@@ -25,7 +25,7 @@ class UsersController < ApplicationController
       redirect_to root_path, :flash => { :notice => 'Account information changed successfully' }
     else
       flash[:message] = 'Please check your input'
-      render "edit_user_options"
+      render 'edit_user_options'
     end
 
   end
@@ -57,7 +57,7 @@ class UsersController < ApplicationController
   end
 
   def check_dean
-    unless current_user.isDean?
+    unless current_user.is_dean?
       redirect_to home_index_path
     end
   end

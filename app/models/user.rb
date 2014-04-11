@@ -18,13 +18,13 @@ class User < ActiveRecord::Base
   def rank_as_string
     case self.rank
       when RANK_DEAN
-        return "Dean"
+        return 'Dean'
       when RANK_PROFESSOR
-        return "Professor"
+        return 'Professor'
       when RANK_STUDENT
-        return "Student"
+        return 'Student'
       else
-        return "Unknown"
+        return 'Unknown'
     end
   end
 
@@ -32,23 +32,23 @@ class User < ActiveRecord::Base
     if name.nil? || name.empty?
       return email.html_safe
     end
-    return name
+    name
   end
 
-  def isStudent?
+  def is_student?
     self.rank == RANK_STUDENT
   end
 
-  def isProfessor?
+  def is_professor?
     self.rank == RANK_PROFESSOR
   end
 
-  def isDean?
+  def is_dean?
     self.rank == RANK_DEAN
   end
 
   def current_year_courses
-    return self.courses_professor.where("start_year = ?", Course.get_current_year)
+    self.courses_professor.where('start_year = ?', Course.get_current_year)
   end
 
   def password_required?
@@ -56,7 +56,7 @@ class User < ActiveRecord::Base
     return true if reset_password_token.present? && reset_password_period_valid?
 
     # If the person already has a pass, only validate if they are updating pass
-    if !encrypted_password.blank?
+    unless encrypted_password.blank?
       password.present? || password_confirmation.present?
     end
   end
