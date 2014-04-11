@@ -57,17 +57,17 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <h3>Student description</h3>
+                    <h3>Student comment</h3>
                     <%= sol.student_comment %>
                 </div>
                 <div class="col-md-5">
-                    <h3>Professor description</h3>
+                    <h3>Professor comment</h3>
                     <!--if professor => can change else like upper-->
                     <% if @user.isStudent? %>
                         <% if sol.professor_comment <=> '' %>
                             <%= sol.professor_comment %>
                         <% else %>
-                            The professor hasn't comment yet
+                            Professor's comment not yet available
                         <% end %>
                     <% else %>
                         <%= form_for [@course,@homework,sol] do |f| %>

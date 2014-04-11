@@ -105,7 +105,7 @@ class HomeworksController < ApplicationController
 
   def index_homework_done
     if current_user.isStudent?
-      @title = "Done Homework"
+      @title = "Past homework"
 
       @homework = Array.new
       for course in current_user.courses
