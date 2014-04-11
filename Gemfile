@@ -61,4 +61,4 @@ gem 'bootstrap_form'
 gem 'data-confirm-modal', git: 'https://github.com/ifad/data-confirm-modal.git'
 
 
-gem 'paperclip', github: 'thoughtbot/paperclip'
+gem 'paperclip', git: 'https://github.com/thoughtbot/paperclip.git'

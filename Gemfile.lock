@@ -1,14 +1,4 @@
 GIT
-  remote: git://github.com/thoughtbot/paperclip.git
-  revision: 113198f979bc793882506114fcc3dc9f6c4e4575
-  specs:
-    paperclip (4.1.1)
-      activemodel (>= 3.0.0)
-      activesupport (>= 3.0.0)
-      cocaine (~> 0.5.3)
-      mime-types
-
-GIT
   remote: https://github.com/ifad/data-confirm-modal.git
   revision: 60af41a47e7edc6dc64eba185a894a067a256ee9
   specs:
@@ -22,6 +12,16 @@ GIT
     jquery-datatables-rails (1.12.2)
       jquery-rails
       sass-rails
+
+GIT
+  remote: https://github.com/thoughtbot/paperclip.git
+  revision: 41da3a3c4c139964a9877c77220f94200d73c87a
+  specs:
+    paperclip (4.1.1)
+      activemodel (>= 3.0.0)
+      activesupport (>= 3.0.0)
+      cocaine (~> 0.5.3)
+      mime-types
 
 GEM
   remote: https://rubygems.org/
