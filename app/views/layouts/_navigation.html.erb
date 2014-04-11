@@ -32,10 +32,10 @@
                                 <!--source https://github.com/plataformatec/devise/wiki/How-To:-Display-a-custom-sign_in-form-anywhere-in-your-app-->
                                 <%= form_for(:user, :class => 'well', :url => session_path(:user)) do |f| %>
                                     <div class="form-group col-xs-12">
-                                        <%= f.text_field :email, :class => 'form-control' %>
+                                        <%= f.text_field :email, :class => 'form-control', :placeholder => 'E-mail' %>
                                     </div>
                                     <div class="form-group col-xs-12">
-                                        <%= f.password_field :password, :class => 'form-control' %>
+                                        <%= f.password_field :password, :class => 'form-control', :placeholder => 'Password' %>
                                     </div>
                                     <div class="form-group col-xs-12">
                                         <%= f.check_box :remember_me %>
