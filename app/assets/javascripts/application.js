@@ -10,10 +10,9 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require bootstrap
-//= require bootstrap-things
 //= require jquery
 //= require jquery_ujs
+//= require bootstrap
 //= require data-confirm-modal
 //= require dataTables/jquery.dataTables
 //= require dataTables/jquery.dataTables.bootstrap3
