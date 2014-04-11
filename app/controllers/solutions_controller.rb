@@ -1,4 +1,7 @@
 class SolutionsController < ApplicationController
+
+  before_filter :authenticate_user!
+
   def index
     @solution = Solution.new
 
@@ -29,8 +32,7 @@ class SolutionsController < ApplicationController
     @solution.user_id = @user.id
     @solution.version = @homework.solutions.where(user_id: @user.id).size+1
 
-    # TODO devise crash if there is an unknown file etension
-    extension = @solution.file.nil? ? 'txt' : File.extname(@solution.file.path)[1..-1]
+    extension = @solution.file.path.nil? ? 'txt' : File.extname(@solution.file.path)[1..-1]
     @solution.mime = extension
 
     if @solution.save
