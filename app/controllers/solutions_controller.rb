@@ -27,6 +27,10 @@ class SolutionsController < ApplicationController
     @course = @homework.course
     @user = current_user
 
+    return redirect_to root_path, :flash => {:error => 'Restricted area'} unless @user.isStudent?
+    return redirect_to [@course,@homework,Solution], :flash => {:error => 'Submission period is finished'} if @homework.due_date < Time.now
+
+
     @solution = Solution.new(get_params)
     @solution.homework_id = @homework.id
     @solution.user_id = @user.id
@@ -37,6 +41,8 @@ class SolutionsController < ApplicationController
 
     if @solution.save
       redirect_to [@course,@homework,Solution]
+    else
+      redirect_to [@course,@homework,Solution], :flash => {:error => 'File size too big'}
     end
   end
 

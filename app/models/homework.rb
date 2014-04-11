@@ -3,5 +3,6 @@ class Homework < ActiveRecord::Base
   has_many :solutions
 
   has_attached_file :file
+  validates_attachment :avatar
   do_not_validate_attachment_file_type :file
 end

@@ -1,6 +1,6 @@
 <h1>Solutions</h1>
 
-<% if @user.isStudent? %>
+<% if @user.isStudent? && @homework.due_date > Time.now %>
     <div class="panel-group container" id="accordion">
         <div class="panel panel-default">
             <div class="panel-heading"
