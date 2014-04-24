@@ -47,7 +47,7 @@ class HomeworksController < ApplicationController
   def edit
     @course = Course.find(params[:course_id])
     @homework = Homework.find(params[:id])
-    unless current_user.isProfessor?
+    unless current_user.is_professor?
       redirect_to course_homeworks_path(@course)
     end
   end
